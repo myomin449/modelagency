@@ -1,0 +1,14 @@
+@font-face{
+	font-family: 'FjallaOne-Regular';
+	src:url('fonts/Fjalla_One/FjallaOne-Regular.ttf');
+}
+
+@font-face{
+	font-family: 'Oswald-VariableFont_wght';
+	src:url('fonts/Oswald/Oswald-VariableFont_wght.ttf');
+}
+
+@font-face{
+	font-family: 'PinyonScript-Regular';
+	src:url('fonts/Pinyon_Script/PinyonScript-Regular.ttf');
+}
