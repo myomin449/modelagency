@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cake Shop!</title>
+	<title>Cake Shop!</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
@@ -11,7 +11,7 @@
   <script type="text/javascript" src="custom.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-
+  <script type="text/javascript" src="custom.js"></script>
   <script type="text/javascript">
     $('#blogCarousel').carousel({
       interval: 5000
@@ -39,47 +39,10 @@
     }
   </style>
 
-  <style type="text/css">
-    /* Style inputs with type="text", select elements and textareas */
-    input[type=text], select, textarea {
-      width: 100%; /* Full width */
-      padding: 12px; /* Some padding */ 
-      border: 1px solid #ccc; /* Gray border */
-      border-radius: 4px; /* Rounded borders */
-      box-sizing: border-box; /* Make sure that padding and width stays in place */
-      margin-top: 6px; /* Add a top margin */
-      margin-bottom: 16px; /* Bottom margin */
-      resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-    }
-
-    /* Style the submit button with a specific background color etc */
-    input[type=submit] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    /* When moving the mouse over the submit button, add a darker green color */
-    input[type=submit]:hover {
-      background-color: #45a049;
-    }
-
-    /* Add a background color and some padding around the form */
-    .containers {
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
-
-  </style>
-
 </head>
 
 <body>
-  <div class="container">
+  <div class="container bg-light">
     <div class="row">
       <div id="banner">
         <!-- Navigation -->
@@ -107,73 +70,138 @@
                   <a class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="cart.html"><i class="fas fa-cart-arrow-down"></i>(<span id="count"></span>)</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <center><img class="d-block w-100" src="images/p13.jpg" alt="Second slide" style="height:360px;"></center> 
-        <div class="container bg-light">
-          <div class="row">
-
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 my-3">
-             <h1>Our Location!</h1><hr>
-             <ul>
-               <li><b>Phone</b>   - (+95) 0912345778</li><br>
-               <li><b>Email</b>   -  myomin@cakeshop.com</li><br>
-               <li><b>Address</b> - (7) Mile, Thalar Waddy Street, Mayangone Ts, Yangon.</li>
-             </ul>
-             <br>
-             
-             <h2>Work Times!</h2><hr><br>
-             <ul>
-              <li>From 9 Am To 8 Pm</li><br>
-              <li>Every Sunday Closed!</li>
+                 <a class="nav-link" href="contact.html">Contact Us</a>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="cart.html"><i class="fas fa-cart-arrow-down"></i>(<span id="count"></span>)</a>
+              </li>
             </ul>
-
-
           </div>
+        </div>
+      </nav>
 
-          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 my-3">
-            <center><h1>Contact Us!</h1></center>
-            <div class="containers">
-              <form action="action_page.php">
+      <center><img class="d-block w-100" src="images/p13.jpg" alt="Second slide" style="height:360px;"></center> 
+      <div class="container">
+        <div class="row">
 
-                <label for="fname">Your Name</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-4">
+            <table align="center" border="1" bgcolor="white" cellspacing="0" cellpadding="15" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th><center>No.</center></th>
+                  <th><center>Name</center></th>
+                  <th><center>price</center></th>
+                  <th><center>Qty</center></th>
+                  <th><center>SubTotal</center></th>
+                </tr>
+                <tbody id="tbody">
 
-                <label for="lname">Your Email</label>
-                <input type="text" id="lname" name="lastname" placeholder="Your Email..">
+                </tbody>
+              </thead>
+              <tfoot>
+              </tfoot>
 
+            </table>
 
-
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
-
-                <input type="submit" value="Send">
-
-              </form>
-            </div>
+            <br>
+            <center><button id="order"><font size="5px">Order</font></button></center>
           </div>
-          
+          <script type="text/javascript">
+            $(document).ready(function(){
+              count();
+              getData();
+              function getData(){
+                var shop_str=localStorage.getItem("cake_shop");
+                if(shop_str){
+                  var shop_arr=JSON.parse(shop_str);
+                  var html='';
+                  var j=1;
+                  var total=0;
+                  $.each(shop_arr,function(i,v){
+                    var qty=v.qty;
+                    var price=v.price;
+                    var sub_total=qty*price;
 
-          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-            <iframe src="https://www.google.com/maps/d/embed?mid=1CqNMksaCMVGFLq0IHiIt6nnrPM4FgKLI" width="100%" height="380"></iframe>
-            
-          </div>
 
+                    html+=`<tr>
+                    <td><center>${j++}</center></td>
+                    <td><center>${v.name}</center></td>
+                    <td><center>${v.price}</center></td>
+                    <td><center><button class="min" data-item_i="${i}">-</button> ${v.qty}<button class="max" data-item_i="${i}">+</button></center></td>
+                    <td><center>${sub_total}</center></td>
+                    </tr>`;
+                    total+=sub_total;
+
+                  })
+                  html+=`<tr>
+                  <td colspan="4"><center>Total</center></td>
+                  <td><center>${total}</center></td>
+                  </tr>`
+                  $("#tbody").html(html);
+
+
+
+                }
+                else{
+                  html='';
+                  $("#tbody").html(html);
+                }
+
+              };
+
+              $("#tbody").on("click",".min",function(){
+                var item_i=$(this).data("item_i");
+                
+                var shop_str=localStorage.getItem("cake_shop");
+                if(shop_str){
+                  var shop_arr=JSON.parse(shop_str);
+                  $.each(shop_arr,function(i,v){
+                    if(item_i==i){
+                      v.qty--;
+                      if(v.qty==0){
+                        shop_arr.splice(item_i,1)}
+                      }
+                      var shopData=JSON.stringify(shop_arr);
+                      localStorage.setItem('cake_shop',shopData);
+                      getData();
+                    })
+                }
+                
+
+              })
+
+              $("#tbody").on("click",".max",function(){
+                var item_i=$(this).data("item_i");
+                
+                var shop_str=localStorage.getItem("cake_shop");
+                if(shop_str){
+                  var shop_arr=JSON.parse(shop_str);
+                  $.each(shop_arr,function(i,v){
+                    if(item_i==i){
+                      v.qty++;
+                    }
+                    var shopData=JSON.stringify(shop_arr);
+                    localStorage.setItem('cake_shop',shopData);
+                    getData();
+                  })
+
+                }
+                
+              })
+              $("#order").click(function(){
+
+                localStorage.clear();
+                getData();
+              })
+            })
+
+          </script>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
   <hr>
 </div>
-
-          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 my-2">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 mt-4">
 
             <h3>Our Branches!</h3>
             <ul type="circle">
@@ -186,15 +214,15 @@
             
           </div>
 
-          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 my-2">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 mt-4">
             <center> <h3>Our Work Time!</h3></center>
             <ul type="circle">
-             <li style="color: #0056BA;">Our work time is from 9 am to 8 pm.</li>
+             <li style="color: blue;">Our work time is from 9 am to 8 pm.</li>
            </ul>
            <center><button>More Details</button></center>
          </div>
 
-         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 my-2">
+         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 mt-4">
           <center><h3>To be Know!</h3></center>
           <ul type="circle">
             <li><a href="#">health and Cakes</a></li>
@@ -206,7 +234,7 @@
           
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 my-2">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 mt-4">
           <center><h3>Find Us On Other!</h3></center>
           <div style='width:40px; float:left;'>
             <a href='&quot;http://twitter.com/' rel='external nofollow' target='_blank'><img alt='Twitter' src='images/twitter.png' style='padding:0;margin:0;border:none;'/></a>
@@ -247,11 +275,6 @@
   </div>
 </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function(){
-    count();
-  })
 
-</script>
 </body>
 </html>

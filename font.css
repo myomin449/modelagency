@@ -12,3 +12,8 @@
 	font-family: 'PinyonScript-Regular';
 	src:url('fonts/Pinyon_Script/PinyonScript-Regular.ttf');
 }
+
+@font-face{
+	font-family: 'DancingScript-Variable';
+	src:url('fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf');
+}
